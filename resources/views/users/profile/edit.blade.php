@@ -32,11 +32,11 @@
             </div>
           </div>
           <div class="mb-3">
-            <label for="name" class="form-label fw-bold">Name</label>
+            <label for="name" class="form-label fw-bold">Name <span class="text-danger">*</span></label>
             <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" autofocus>
           </div>
           <div class="mb-3">
-            <label for="email" class="form-label fw-bold">Email Address</label>
+            <label for="email" class="form-label fw-bold">Email Address <span class="text-danger">*</span></label>
             <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $user->email) }}">
             {{-- Error Message Area --}}
             @error('email')

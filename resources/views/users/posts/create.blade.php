@@ -14,7 +14,7 @@
         @csrf
         <div class="mb-3">
           <label for="category" class="form-label d-block fw-bold">
-            Category <span class="text-muted fw-normal">(Up to 3)</span>
+            Category <span class="text-muted fw-normal">(Up to 3)</span> <span class="text-danger">*</span>
           </label>
           @foreach ($all_categories as $category)
             <div class="form-check form-check-inline mb-3">
@@ -28,7 +28,7 @@
           @enderror
 
           <div class="mb-3">
-            <label for="name" class="form-label fw-bold">Name</label>
+            <label for="name" class="form-label fw-bold">Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="name">
           </div>
           {{-- Error Message Area --}}
@@ -37,7 +37,7 @@
           @enderror
 
           <div class="mb-3">
-            <label for="artist" class="form-label fw-bold">Artist</label>
+            <label for="artist" class="form-label fw-bold">Artist <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="artist">
           </div>
           {{-- Error Message Area --}}
@@ -64,7 +64,7 @@
           @enderror
 
           <div class="mb-5">
-            <label for="image" class="form-label fw-bold">Image</label>
+            <label for="image" class="form-label fw-bold">Image <span class="text-danger">*</span></label>
             <input type="file" class="form-control" name="image" area-describedby="image-info">
             <div class="form-text" id="image-info">
               The acceptable formats are jpeg, jpg, png and gif only. <br>

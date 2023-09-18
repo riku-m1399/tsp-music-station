@@ -15,7 +15,7 @@
         @method('PATCH')
         <div class="mb-3">
           <label for="category" class="form-label d-block fw-bold">
-            Category <span class="text-muted fw-normal">(Up to 3)</span>
+            Category <span class="text-muted fw-normal">(Up to 3)</span> <span class="text-danger">*</span>
           </label>
           @foreach ($all_categories as $category)
             @if (in_array($category->id, $selected_categories))
@@ -36,7 +36,7 @@
           @enderror
 
           <div class="mb-3">
-            <label for="name" class="form-label fw-bold">Name</label>
+            <label for="name" class="form-label fw-bold">Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="name" value="{{ old('name', $post->name) }}">
           </div>
           {{-- Error message area --}}
@@ -46,7 +46,7 @@
 
 
           <div class="mb-3">
-            <label for="artist" class="form-label fw-bold">Artist</label>
+            <label for="artist" class="form-label fw-bold">Artist <span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="artist" value="{{ old('artist', $post->artist) }}">
           </div>
           {{-- Error message area --}}
