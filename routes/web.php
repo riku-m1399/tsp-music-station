@@ -24,7 +24,7 @@ use App\Http\Controllers\CategoryController;
 //     return view('welcome');
 // });
 
-Auth::routes(['verify' => true]);
+Auth::routes();
 
 Route::group(['middleware' => 'auth'],function(){
     Route::get('/', [HomeController::class, 'index'])->name('index');
