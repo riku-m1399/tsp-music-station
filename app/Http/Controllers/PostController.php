@@ -54,7 +54,8 @@ class PostController extends Controller
 
     public function show($id){
         $post = $this->post->findOrFail($id);
-        return view('users.posts.show')->with('post', $post);
+        $artist_youtubes = $this->getArtistInfoOnYoutube($id);
+        return view('users.posts.show')->with('post', $post)->with('artist_youtubes', $artist_youtubes);
     }
 
     public function edit($id){
@@ -114,5 +115,51 @@ class PostController extends Controller
     public function destroy($id){
         $this->post->destroy($id);
         return redirect()->route('index');
+    }
+
+    public function getArtistInfoOnYoutube($id){
+        $post = $this->post->findOrFail($id);
+        $artist = $post->artist;
+        $artist_info = $this->searchArtistOnYoutube($artist);
+
+        return $artist_info;
+    }
+
+    public function searchArtistOnYoutube($artist){
+        define('YOUTUBE_API_KEY', 'AIzaSyBVXUoy58DpGFEr46gy1W0fKsujX9NxIEc'); // API key
+
+        $url = "https://www.googleapis.com/youtube/v3/search";
+        $part = array(
+        'snippet',
+        );
+
+        $query = array(
+            'key' => YOUTUBE_API_KEY,
+            'q' => $artist, // the word you want to search for
+            'part' => implode(",",$part),
+            'order' => 'relevance',
+            'maxResults' => 3,
+            'type' => 'video',
+        );
+
+        $results = $this->curl($url, $query);
+        $results_array = json_decode($results, true);
+
+        $items = [];
+        for($i = 0; $i <= 2; $i++){
+            $items[] = $results_array["items"][$i];
+        }
+
+        return $items;
+    }
+
+    function curl($url, $query){
+        $param = http_build_query($query, '', '&');
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url."?".$param);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        return $result;
     }
 }

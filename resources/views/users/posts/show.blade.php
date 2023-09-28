@@ -82,9 +82,11 @@
             {{-- Categories --}}
             <div class="col text-end">
               @foreach ($post->categoryPost as $category_post)
+                <a href="{{ route('category.show', $category_post->category_id) }}">
                   <div class="badge bg-secondary bg-opacity-50">
                     {{$category_post->category->name}}
                   </div>
+                </a>
               @endforeach
             </div>
           </div>
@@ -136,6 +138,20 @@
                 @endforeach
               </ul>
           @endif
+
+          {{-- Show Youtube artist search results --}}
+          <div class="row mt-5">
+            <p class="fw-bold">Artist search results on Youtube</p>
+          </div>
+          @foreach ($artist_youtubes as $artist_youtube)
+            <div class="row mb-3">
+              <a href="https://www.youtube.com/watch?v={{ $artist_youtube['id']['videoId'] }}">
+                <img src="{{ $artist_youtube['snippet']['thumbnails']['high']['url'] }}" alt="search results of {{ $post->artist }}" class="w-100">
+                <p class="small">{{ $artist_youtube['snippet']['title'] }}</p>
+              </a>
+            </div>
+          @endforeach
+          
         </div>
       </div>
     </div>
